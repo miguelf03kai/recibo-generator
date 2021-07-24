@@ -135,7 +135,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 212), new Point(530, 212));
                 //Nome Cliente
-                e.Graphics.DrawString(tbCliente.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 196, 200, 30));
+                e.Graphics.DrawString(tbCliente.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 196, 400, 30));
                 e.Graphics.DrawString("CPF/CNPJ: ", content, new SolidBrush(Color.Black), new Rectangle(540, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(630, 212), new Point(780, 212));
                 //Cpf/cnpj
@@ -143,11 +143,14 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawString("A importância de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 227, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 //valor Extenso
-                e.Graphics.DrawString("A importância de: ", content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 200, 30));
+
+                string str = conversor.EscreverExtenso(Decimal.Parse(tbValor.Text)).ToLower();
+                //coloca em maiúsculo apenas a primeira letra da string
+                e.Graphics.DrawString(str[0].ToString().ToUpper()+str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
                 e.Graphics.DrawString("Referente a.....: ", content, new SolidBrush(Color.Black), new Rectangle(60, 257, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 272), new Point(780, 272));
                 //referente
-                e.Graphics.DrawString(tbCorresp.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 256, 200, 30));
+                e.Graphics.DrawString(tbCorresp.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 256, 600, 30));
 
                 DateTime dt = DateTime.Now;
 
