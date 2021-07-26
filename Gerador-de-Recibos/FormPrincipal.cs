@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +24,8 @@ namespace Gerador_de_Recibos
 
         validaCNPJ vCNPJ = new validaCNPJ();
         validaCPF vCPF = new validaCPF();
+
+        string valor = "";
 
         public void Emitir()
         {
@@ -41,8 +45,9 @@ namespace Gerador_de_Recibos
             try
             {
                 //formata o valor digitado
-                tbValor.Text = double.Parse(tbValor.Text).ToString("C2");
-                tbValor.Text = tbValor.Text.Substring(1);
+                //tbValor.Text = double.Parse(tbValor.Text).ToString("C2");
+                valor = tbValor.Text.Substring(1);
+                Console.WriteLine(valor);
 
                 if (tbCliente.Text == "")
                 {
@@ -130,7 +135,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 127, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 127, 138, 30));
                 //Valor
-                e.Graphics.DrawString(tbValor.Text, content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
+                e.Graphics.DrawString(tbValor.Text.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
                 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 212), new Point(530, 212));
@@ -144,7 +149,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 //valor Extenso
 
-                string str = conversor.EscreverExtenso(Decimal.Parse(tbValor.Text)).ToLower();
+                string str = conversor.EscreverExtenso(Decimal.Parse(valor)).ToLower();
                 //coloca em maiúsculo apenas a primeira letra da string
                 e.Graphics.DrawString(str[0].ToString().ToUpper()+str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
                 e.Graphics.DrawString("Referente a.....: ", content, new SolidBrush(Color.Black), new Rectangle(60, 257, 200, 30));
@@ -177,6 +182,39 @@ namespace Gerador_de_Recibos
         private void btFe_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void tbValor_TextChanged(object sender, EventArgs e)
+        {
+            //Remove previous formatting, or the decimal check will fail including leading zeros
+            string value = tbValor.Text.Replace(",", "")
+                .Replace("$", "").Replace(".", "").TrimStart('0');
+            decimal ul;
+
+            //Check we are indeed handling a number
+            if (decimal.TryParse(value, out ul))
+            {
+                ul /= 100;
+                //Unsub the event so we don't enter a loop
+                tbValor.TextChanged -= tbValor_TextChanged;
+                //Format the text as currency
+                tbValor.Text = string.Format("{0:C2}", ul);
+                tbValor.TextChanged += tbValor_TextChanged;
+                tbValor.Select(tbValor.Text.Length, 0);
+            }
+            bool goodToGo = TextisValid(tbValor.Text);
+            //enterButton.Enabled = goodToGo;
+            if (!goodToGo)
+            {
+                tbValor.Text = "$0.00";
+                tbValor.Select(tbValor.Text.Length, 0);
+            }
+        }
+
+        private bool TextisValid(string text)
+        {
+            Regex money = new Regex(@"^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$");
+            return money.IsMatch(text);
         }
     }
 }

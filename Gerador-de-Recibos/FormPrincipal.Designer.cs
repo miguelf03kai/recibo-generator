@@ -83,7 +83,8 @@
             this.tbValor.Name = "tbValor";
             this.tbValor.Size = new System.Drawing.Size(91, 20);
             this.tbValor.TabIndex = 16;
-            this.tbValor.Text = "0,00";
+            this.tbValor.Text = "$0,00";
+            this.tbValor.TextChanged += new System.EventHandler(this.tbValor_TextChanged);
             // 
             // maskedTextBox1
             // 
