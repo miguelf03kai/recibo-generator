@@ -44,8 +44,6 @@ namespace Gerador_de_Recibos
         {
             try
             {
-                //formata o valor digitado
-                //tbValor.Text = double.Parse(tbValor.Text).ToString("C2");
                 valor = tbValor.Text.Substring(1);
                 Console.WriteLine(valor);
 
@@ -59,9 +57,9 @@ namespace Gerador_de_Recibos
                     MessageBox.Show("Por Favor Preencha o campo correspondente", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     tbCorresp.Focus();
                 }
-                else if (tbCpfCnpj.TextLength < 14)
+                else if (tbCpfCnpj.TextLength < 15)
                 {
-                    if (vCPF.IsCpf(tbCpfCnpj.Text) == false)
+                    if (vCPF.IsCpf(tbCpfCnpj.Text.Replace(".","").Replace("-","")) == false)
                     {
                         MessageBox.Show("CPF Inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         tbCpfCnpj.Focus();
@@ -71,9 +69,9 @@ namespace Gerador_de_Recibos
                         Emitir();
                     }
                 }
-                else if (tbCpfCnpj.TextLength > 11)
+                else if (tbCpfCnpj.TextLength > 14)
                 {
-                    if (vCNPJ.IsCnpj(tbCpfCnpj.Text) == false)
+                    if (vCNPJ.IsCnpj(tbCpfCnpj.Text.Replace(".", "").Replace("/","").Replace("-", "")) == false)
                     {
                         MessageBox.Show("CNPJ Inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         tbCpfCnpj.Focus();
@@ -215,6 +213,21 @@ namespace Gerador_de_Recibos
         {
             Regex money = new Regex(@"^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$");
             return money.IsMatch(text);
+        }
+
+        private void tbCpfCnpj_Leave(object sender, EventArgs e)
+        {
+            //if()
+
+            if (tbCpfCnpj.Text.Length < 12)
+                tbCpfCnpj.Mask = "###.###.###-##";
+            else if (tbCpfCnpj.Text.Length > 11)
+                tbCpfCnpj.Mask = "##.###.###/####-##";
+        }
+
+        private void tbCpfCnpj_Enter(object sender, EventArgs e)
+        {
+            tbCpfCnpj.Mask = "";
         }
     }
 }

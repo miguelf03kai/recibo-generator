@@ -40,7 +40,6 @@
             this.btEmitir = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbCpfCnpj = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbCliente = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,12 +49,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.tbCpfCnpj = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBanner)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbCpfCnpj);
             this.groupBox1.Controls.Add(this.tbValor);
             this.groupBox1.Controls.Add(this.maskedTextBox1);
             this.groupBox1.Controls.Add(this.button1);
@@ -66,7 +67,6 @@
             this.groupBox1.Controls.Add(this.btEmitir);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tbCpfCnpj);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.tbCliente);
             this.groupBox1.Controls.Add(this.label1);
@@ -82,7 +82,7 @@
             this.tbValor.Location = new System.Drawing.Point(449, 42);
             this.tbValor.Name = "tbValor";
             this.tbValor.Size = new System.Drawing.Size(91, 20);
-            this.tbValor.TabIndex = 16;
+            this.tbValor.TabIndex = 3;
             this.tbValor.Text = "$0,00";
             this.tbValor.TextChanged += new System.EventHandler(this.tbValor_TextChanged);
             // 
@@ -99,7 +99,7 @@
             this.button1.Location = new System.Drawing.Point(308, 178);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 23);
-            this.button1.TabIndex = 14;
+            this.button1.TabIndex = 8;
             this.button1.Text = "Consultar/Reimprimir ";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = true;
@@ -110,7 +110,7 @@
             this.btLimpar.Location = new System.Drawing.Point(227, 178);
             this.btLimpar.Name = "btLimpar";
             this.btLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btLimpar.TabIndex = 13;
+            this.btLimpar.TabIndex = 7;
             this.btLimpar.Text = "Limpar";
             this.btLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btLimpar.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@
             this.btFe.Location = new System.Drawing.Point(465, 178);
             this.btFe.Name = "btFe";
             this.btFe.Size = new System.Drawing.Size(75, 23);
-            this.btFe.TabIndex = 12;
+            this.btFe.TabIndex = 9;
             this.btFe.Text = "Fechar";
             this.btFe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btFe.UseVisualStyleBackColor = true;
@@ -133,7 +133,7 @@
             this.tbCorresp.Location = new System.Drawing.Point(17, 100);
             this.tbCorresp.Name = "tbCorresp";
             this.tbCorresp.Size = new System.Drawing.Size(523, 20);
-            this.tbCorresp.TabIndex = 11;
+            this.tbCorresp.TabIndex = 4;
             // 
             // btnDadosEmissor
             // 
@@ -141,7 +141,7 @@
             this.btnDadosEmissor.Location = new System.Drawing.Point(17, 178);
             this.btnDadosEmissor.Name = "btnDadosEmissor";
             this.btnDadosEmissor.Size = new System.Drawing.Size(123, 23);
-            this.btnDadosEmissor.TabIndex = 10;
+            this.btnDadosEmissor.TabIndex = 5;
             this.btnDadosEmissor.Text = "Dados do Emissor";
             this.btnDadosEmissor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDadosEmissor.UseVisualStyleBackColor = true;
@@ -153,7 +153,7 @@
             this.btEmitir.Location = new System.Drawing.Point(146, 178);
             this.btEmitir.Name = "btEmitir";
             this.btEmitir.Size = new System.Drawing.Size(75, 23);
-            this.btEmitir.TabIndex = 9;
+            this.btEmitir.TabIndex = 6;
             this.btEmitir.Text = "Emitir";
             this.btEmitir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btEmitir.UseVisualStyleBackColor = true;
@@ -177,14 +177,6 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Valor:";
             // 
-            // tbCpfCnpj
-            // 
-            this.tbCpfCnpj.Location = new System.Drawing.Point(277, 42);
-            this.tbCpfCnpj.MaxLength = 14;
-            this.tbCpfCnpj.Name = "tbCpfCnpj";
-            this.tbCpfCnpj.Size = new System.Drawing.Size(157, 20);
-            this.tbCpfCnpj.TabIndex = 4;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -199,7 +191,7 @@
             this.tbCliente.Location = new System.Drawing.Point(17, 42);
             this.tbCliente.Name = "tbCliente";
             this.tbCliente.Size = new System.Drawing.Size(246, 20);
-            this.tbCliente.TabIndex = 2;
+            this.tbCliente.TabIndex = 1;
             // 
             // label1
             // 
@@ -267,6 +259,15 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Telefone:";
             // 
+            // tbCpfCnpj
+            // 
+            this.tbCpfCnpj.Location = new System.Drawing.Point(277, 42);
+            this.tbCpfCnpj.Name = "tbCpfCnpj";
+            this.tbCpfCnpj.Size = new System.Drawing.Size(158, 20);
+            this.tbCpfCnpj.TabIndex = 2;
+            this.tbCpfCnpj.Enter += new System.EventHandler(this.tbCpfCnpj_Enter);
+            this.tbCpfCnpj.Leave += new System.EventHandler(this.tbCpfCnpj_Leave);
+            // 
             // FormPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -297,7 +298,6 @@
         private System.Windows.Forms.Button btEmitir;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbCpfCnpj;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbCliente;
         private System.Windows.Forms.Label label1;
@@ -313,6 +313,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.MaskedTextBox tbCpfCnpj;
     }
 }
 
