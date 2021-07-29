@@ -18,14 +18,25 @@ namespace Gerador_de_Recibos
         public FormPrincipal()
         {
             InitializeComponent();
+            //sqlite.CreateData();
         }
 
         FormDadosEmissor dEmissor = new FormDadosEmissor();
 
         validaCNPJ vCNPJ = new validaCNPJ();
         validaCPF vCPF = new validaCPF();
+        SQLite sqlite = new SQLite();
 
         string valor = "";
+
+        int numeroRecibo = 0;
+
+        public void saveData()
+        {
+            numeroRecibo = sqlite.automaticId();
+            sqlite.persistData(numeroRecibo, tbCliente.Text, tbCpfCnpj.Text, tbValor.Text, tbCorresp.Text);
+        }
+
 
         public void Emitir()
         {
@@ -45,7 +56,7 @@ namespace Gerador_de_Recibos
             try
             {
                 valor = tbValor.Text.Substring(1);
-                Console.WriteLine(valor);
+                //Console.WriteLine(valor);
 
                 if (tbCliente.Text == "")
                 {
@@ -66,6 +77,7 @@ namespace Gerador_de_Recibos
                     }
                     else
                     {
+                        saveData();
                         Emitir();
                     }
                 }
@@ -78,6 +90,7 @@ namespace Gerador_de_Recibos
                     }
                     else
                     {
+                        saveData();
                         Emitir();
                     }
                 }
@@ -85,7 +98,7 @@ namespace Gerador_de_Recibos
             }
             catch (Exception error)
             {
-                MessageBox.Show("Campo Valor inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Campo Valor inválido: "+error, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbValor.Focus();
 
             }
@@ -128,7 +141,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(600, 50), new Point(600, 177));
 
                 e.Graphics.DrawString("RECIBO", headers, new SolidBrush(Color.Black), new Rectangle(650, 60, 200, 30));
-                e.Graphics.DrawString("N°: 0000000001", content, new SolidBrush(Color.Black), new Rectangle(640, 85, 200, 30));
+                e.Graphics.DrawString("N°: "+Convert.ToString(numeroRecibo).PadLeft(10,'0'), content, new SolidBrush(Color.Black), new Rectangle(640, 85, 200, 30));
                 e.Graphics.DrawString("R$: ", headers, new SolidBrush(Color.Black), new Rectangle(605, 128, 200, 30));
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 127, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 127, 138, 30));
@@ -229,5 +242,17 @@ namespace Gerador_de_Recibos
         {
             tbCpfCnpj.Mask = "";
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FormConsultar fconsult = new FormConsultar();
+            fconsult.ShowDialog();
+        }
+
+        private void FormPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
