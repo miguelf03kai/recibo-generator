@@ -43,8 +43,8 @@ namespace Gerador_de_Recibos
                                                 "cliente varchar(100)," +
                                                 "cpf_cnpj varchar(100)," +
                                                 "valor varchar(100)," +
-                                                "descricao varchar(100)" +
-                                                ");";
+                                                "descricao varchar(100)," +
+                                                "tipo boolean);";
 
                     //Now lets execute the SQL ;D
                     sqlite_cmd.ExecuteNonQuery();
@@ -57,14 +57,14 @@ namespace Gerador_de_Recibos
             }
         }
 
-        public void persistData(int id,string cliente,string cpf_cnpj,string valor,string descricao)
+        public void persistData(int id,string cliente,string cpf_cnpj,string valor,string descricao,int tipo)
         {
             try
             {
                 sqlite_con = new SQLiteConnection("Data Source=data.db;Version=3");
                 sqlite_con.Open();
                 sqlite_cmd = sqlite_con.CreateCommand();
-                sqlite_cmd.CommandText = "INSERT INTO recibo (id,cliente,cpf_cnpj,valor,descricao) values("+id+",'"+cliente+"','"+cpf_cnpj+"','"+valor+"','"+descricao+"')";
+                sqlite_cmd.CommandText = "INSERT INTO recibo (id,cliente,cpf_cnpj,valor,descricao,tipo) values("+id+",'"+cliente+"','"+cpf_cnpj+"','"+valor+"','"+descricao+"',"+tipo+")";
                 sqlite_cmd.ExecuteNonQuery();
             }
             catch (Exception error)

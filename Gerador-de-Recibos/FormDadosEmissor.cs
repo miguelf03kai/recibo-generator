@@ -112,5 +112,21 @@ namespace Gerador_de_Recibos
                 MessageBox.Show("Arquivo Não Selecionado", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void tbCpfCnpj_Leave(object sender, EventArgs e)
+        {
+            if(tbCpfCnpj.Text.Length > 11){
+                tbCpfCnpj.Mask = "##.###.###/####-##";
+            }
+            else if (tbCpfCnpj.Text.Length < 14)
+            {
+                tbCpfCnpj.Mask = "###.###.###-##";
+            }
+        }
+
+        private void tbCpfCnpj_Enter(object sender, EventArgs e)
+        {
+            tbCpfCnpj.Mask = "";
+        }
     }
 }

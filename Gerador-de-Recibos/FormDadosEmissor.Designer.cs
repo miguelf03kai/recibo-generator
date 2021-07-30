@@ -41,9 +41,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbTelefone = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbCpfCnpj = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbCidade = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,6 +51,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btFechar = new System.Windows.Forms.Button();
+            this.tbCpfCnpj = new System.Windows.Forms.MaskedTextBox();
+            this.tbTelefone = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +75,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbTelefone);
+            this.groupBox1.Controls.Add(this.tbCpfCnpj);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btDiretorio);
             this.groupBox1.Controls.Add(this.logo);
@@ -84,9 +86,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.tbEmail);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.tbTelefone);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.tbCpfCnpj);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.tbCidade);
             this.groupBox1.Controls.Add(this.label4);
@@ -180,13 +180,6 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "Email:";
             // 
-            // tbTelefone
-            // 
-            this.tbTelefone.Location = new System.Drawing.Point(79, 154);
-            this.tbTelefone.Name = "tbTelefone";
-            this.tbTelefone.Size = new System.Drawing.Size(246, 20);
-            this.tbTelefone.TabIndex = 14;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -195,13 +188,6 @@
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 13;
             this.label6.Text = "Telefone:";
-            // 
-            // tbCpfCnpj
-            // 
-            this.tbCpfCnpj.Location = new System.Drawing.Point(79, 128);
-            this.tbCpfCnpj.Name = "tbCpfCnpj";
-            this.tbCpfCnpj.Size = new System.Drawing.Size(246, 20);
-            this.tbCpfCnpj.TabIndex = 12;
             // 
             // label5
             // 
@@ -285,6 +271,23 @@
             this.btFechar.UseVisualStyleBackColor = true;
             this.btFechar.Click += new System.EventHandler(this.btFechar_Click);
             // 
+            // tbCpfCnpj
+            // 
+            this.tbCpfCnpj.Location = new System.Drawing.Point(79, 128);
+            this.tbCpfCnpj.Name = "tbCpfCnpj";
+            this.tbCpfCnpj.Size = new System.Drawing.Size(246, 20);
+            this.tbCpfCnpj.TabIndex = 23;
+            this.tbCpfCnpj.Enter += new System.EventHandler(this.tbCpfCnpj_Enter);
+            this.tbCpfCnpj.Leave += new System.EventHandler(this.tbCpfCnpj_Leave);
+            // 
+            // tbTelefone
+            // 
+            this.tbTelefone.Location = new System.Drawing.Point(79, 154);
+            this.tbTelefone.Mask = "(##) ####-####";
+            this.tbTelefone.Name = "tbTelefone";
+            this.tbTelefone.Size = new System.Drawing.Size(246, 20);
+            this.tbTelefone.TabIndex = 24;
+            // 
             // FormDadosEmissor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,9 +322,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbTelefone;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbCpfCnpj;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbCidade;
         private System.Windows.Forms.Label label4;
@@ -332,5 +333,7 @@
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btFechar;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.MaskedTextBox tbCpfCnpj;
+        private System.Windows.Forms.MaskedTextBox tbTelefone;
     }
 }
