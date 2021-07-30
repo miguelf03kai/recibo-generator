@@ -21,34 +21,39 @@ namespace Gerador_de_Recibos
         {
             try
             {
-                //create a new database connection:
-                sqlite_con = new SQLiteConnection("Data Source=data.db;Version=3;New=True;Compress=True");
 
-                //open the connection:
-                sqlite_con.Open();
+                if (File.Exists("data.db"))
+                {
+                    //pass
+                }
+                else
+                {
+                    //create a new database connection:
+                    sqlite_con = new SQLiteConnection("Data Source=data.db;Version=3;New=True;Compress=True");
 
-                //create a new SQL command:
-                sqlite_cmd = sqlite_con.CreateCommand();
+                    //open the connection:
+                    sqlite_con.Open();
 
-                //Let the SQLiteCommand object know our SQL-Query:
-                sqlite_cmd.CommandText = "CREATE TABLE recibo (" +
-                                            "id integer primary key," +
-                                            "cliente varchar(100)," +
-                                            "cpf_cnpj varchar(100)," +
-                                            "valor varchar(100)," +
-                                            "descricao varchar(100)" +
-                                            ");";
+                    //create a new SQL command:
+                    sqlite_cmd = sqlite_con.CreateCommand();
 
-                //Now lets execute the SQL ;D
-                sqlite_cmd.ExecuteNonQuery();               
+                    //Let the SQLiteCommand object know our SQL-Query:
+                    sqlite_cmd.CommandText = "CREATE TABLE recibo (" +
+                                                "id integer primary key," +
+                                                "cliente varchar(100)," +
+                                                "cpf_cnpj varchar(100)," +
+                                                "valor varchar(100)," +
+                                                "descricao varchar(100)" +
+                                                ");";
+
+                    //Now lets execute the SQL ;D
+                    sqlite_cmd.ExecuteNonQuery();
+
+                    sqlite_con.Close();
+                }            
             }
             catch(Exception error){
                 throw error;
-            }
-            finally
-            {
-                //we are ready, now lets cleanup and close our connection:
-                sqlite_con.Close();
             }
         }
 
@@ -78,8 +83,9 @@ namespace Gerador_de_Recibos
             {
                 count = Convert.ToInt32(File.ReadLines(@".counter").Skip(0).Take(1).First());
                 StreamWriter sw = new StreamWriter(@".counter");
-                sw.WriteLine(count+1);
+                sw.WriteLine(count + 1);
                 sw.Close();
+
             }
             catch (Exception error)
             {

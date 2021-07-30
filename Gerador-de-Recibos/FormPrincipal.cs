@@ -18,7 +18,9 @@ namespace Gerador_de_Recibos
         public FormPrincipal()
         {
             InitializeComponent();
-            //sqlite.CreateData();
+            sqlite.CreateData();
+            configCreator();
+            createCounter();
         }
 
         FormDadosEmissor dEmissor = new FormDadosEmissor();
@@ -252,6 +254,43 @@ namespace Gerador_de_Recibos
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void configCreator()
+        {
+            if (File.Exists("config.ini"))
+            {
+                //pass
+            }
+            else
+            {
+                StreamWriter sw = new StreamWriter(@"config.ini");
+                sw.WriteLine("[EMITENTE]\n" +
+                "EMPRESA=\n" +
+                "ENDERECO=\n" +
+                "BAIRRO=\n" +
+                "CIDADE=\n" +
+                "CFP_CNPJ=\n" +
+                "TELEFONE=\n" +
+                "EMAIL=\n" +
+                "SITE=\n" +
+                "LOGO=");
+                sw.Close();
+            }
+        }
+
+        public void createCounter()
+        {
+            if (File.Exists(".counter"))
+            {
+                //pass
+            }
+            else
+            {
+                StreamWriter sw = new StreamWriter(@".counter");
+                sw.WriteLine(0);
+                sw.Close();
+            }
         }
 
     }
