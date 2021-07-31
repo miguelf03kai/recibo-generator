@@ -114,7 +114,15 @@ namespace Gerador_de_Recibos
             sqlite_con = new SQLiteConnection("Data Source=data.db;Version=3");
             sqlite_con.Open();
             sqlite_cmd = sqlite_con.CreateCommand();
-            sqlite_cmd.CommandText = "select * from recibo where cliente like '%"+content+"%'";
+
+            int value;
+
+            if(int.TryParse(content,out value))
+                sqlite_cmd.CommandText = "select * from recibo where id = "+value;
+            else
+                sqlite_cmd.CommandText = "select * from recibo where cliente like '%" + content + "%'";
+
+
             SQLiteDataAdapter da = new SQLiteDataAdapter();
             da.SelectCommand = sqlite_cmd;
             DataTable dt = new DataTable();
