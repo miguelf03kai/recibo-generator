@@ -36,12 +36,7 @@
             this.tbCpfCnpj = new System.Windows.Forms.MaskedTextBox();
             this.tbValor = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btLimpar = new System.Windows.Forms.Button();
-            this.btFe = new System.Windows.Forms.Button();
             this.tbCorresp = new System.Windows.Forms.TextBox();
-            this.btnDadosEmissor = new System.Windows.Forms.Button();
-            this.btEmitir = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -52,8 +47,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.pbBanner = new System.Windows.Forms.PictureBox();
             this.printDocument2 = new System.Drawing.Printing.PrintDocument();
+            this.pbBanner = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btLimpar = new System.Windows.Forms.Button();
+            this.btFe = new System.Windows.Forms.Button();
+            this.btnDadosEmissor = new System.Windows.Forms.Button();
+            this.btEmitir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbBanner)).BeginInit();
@@ -141,72 +141,12 @@
             this.maskedTextBox1.Size = new System.Drawing.Size(100, 20);
             this.maskedTextBox1.TabIndex = 15;
             // 
-            // button1
-            // 
-            this.button1.Image = global::Gerador_de_Recibos.Properties.Resources.search;
-            this.button1.Location = new System.Drawing.Point(308, 178);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Consultar/Reimprimir ";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // btLimpar
-            // 
-            this.btLimpar.Image = global::Gerador_de_Recibos.Properties.Resources.refresh;
-            this.btLimpar.Location = new System.Drawing.Point(227, 178);
-            this.btLimpar.Name = "btLimpar";
-            this.btLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btLimpar.TabIndex = 7;
-            this.btLimpar.Text = "Limpar";
-            this.btLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btLimpar.UseVisualStyleBackColor = true;
-            this.btLimpar.Click += new System.EventHandler(this.btLimpar_Click);
-            // 
-            // btFe
-            // 
-            this.btFe.Image = global::Gerador_de_Recibos.Properties.Resources.exit;
-            this.btFe.Location = new System.Drawing.Point(465, 178);
-            this.btFe.Name = "btFe";
-            this.btFe.Size = new System.Drawing.Size(75, 23);
-            this.btFe.TabIndex = 9;
-            this.btFe.Text = "Fechar";
-            this.btFe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btFe.UseVisualStyleBackColor = true;
-            this.btFe.Click += new System.EventHandler(this.btFe_Click);
-            // 
             // tbCorresp
             // 
             this.tbCorresp.Location = new System.Drawing.Point(17, 135);
             this.tbCorresp.Name = "tbCorresp";
             this.tbCorresp.Size = new System.Drawing.Size(523, 20);
             this.tbCorresp.TabIndex = 4;
-            // 
-            // btnDadosEmissor
-            // 
-            this.btnDadosEmissor.Image = global::Gerador_de_Recibos.Properties.Resources.settings;
-            this.btnDadosEmissor.Location = new System.Drawing.Point(17, 178);
-            this.btnDadosEmissor.Name = "btnDadosEmissor";
-            this.btnDadosEmissor.Size = new System.Drawing.Size(123, 23);
-            this.btnDadosEmissor.TabIndex = 5;
-            this.btnDadosEmissor.Text = "Dados do Emissor";
-            this.btnDadosEmissor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDadosEmissor.UseVisualStyleBackColor = true;
-            this.btnDadosEmissor.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btEmitir
-            // 
-            this.btEmitir.Image = global::Gerador_de_Recibos.Properties.Resources.print;
-            this.btEmitir.Location = new System.Drawing.Point(146, 178);
-            this.btEmitir.Name = "btEmitir";
-            this.btEmitir.Size = new System.Drawing.Size(75, 23);
-            this.btEmitir.TabIndex = 6;
-            this.btEmitir.Text = "Emitir";
-            this.btEmitir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btEmitir.UseVisualStyleBackColor = true;
-            this.btEmitir.Click += new System.EventHandler(this.button1_Click);
             // 
             // label4
             // 
@@ -275,6 +215,7 @@
             this.label5.Size = new System.Drawing.Size(110, 13);
             this.label5.TabIndex = 2;
             this.label5.Text = "Desenvolvido por:";
+            this.label5.Visible = false;
             // 
             // label6
             // 
@@ -286,6 +227,7 @@
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "Email:";
+            this.label6.Visible = false;
             // 
             // label7
             // 
@@ -297,20 +239,83 @@
             this.label7.Size = new System.Drawing.Size(61, 13);
             this.label7.TabIndex = 4;
             this.label7.Text = "Telefone:";
+            this.label7.Visible = false;
+            // 
+            // printDocument2
+            // 
+            this.printDocument2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument2_PrintPage);
             // 
             // pbBanner
             // 
             this.pbBanner.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pbBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbBanner.Image = global::Gerador_de_Recibos.Properties.Resources.banner;
             this.pbBanner.Location = new System.Drawing.Point(12, 12);
             this.pbBanner.Name = "pbBanner";
             this.pbBanner.Size = new System.Drawing.Size(558, 87);
+            this.pbBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbBanner.TabIndex = 1;
             this.pbBanner.TabStop = false;
             // 
-            // printDocument2
+            // button1
             // 
-            this.printDocument2.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument2_PrintPage);
+            this.button1.Image = global::Gerador_de_Recibos.Properties.Resources.search;
+            this.button1.Location = new System.Drawing.Point(308, 178);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(139, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Consultar/Reimprimir ";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // btLimpar
+            // 
+            this.btLimpar.Image = global::Gerador_de_Recibos.Properties.Resources.refresh;
+            this.btLimpar.Location = new System.Drawing.Point(227, 178);
+            this.btLimpar.Name = "btLimpar";
+            this.btLimpar.Size = new System.Drawing.Size(75, 23);
+            this.btLimpar.TabIndex = 7;
+            this.btLimpar.Text = "Limpar";
+            this.btLimpar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btLimpar.UseVisualStyleBackColor = true;
+            this.btLimpar.Click += new System.EventHandler(this.btLimpar_Click);
+            // 
+            // btFe
+            // 
+            this.btFe.Image = global::Gerador_de_Recibos.Properties.Resources.exit;
+            this.btFe.Location = new System.Drawing.Point(465, 178);
+            this.btFe.Name = "btFe";
+            this.btFe.Size = new System.Drawing.Size(75, 23);
+            this.btFe.TabIndex = 9;
+            this.btFe.Text = "Fechar";
+            this.btFe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btFe.UseVisualStyleBackColor = true;
+            this.btFe.Click += new System.EventHandler(this.btFe_Click);
+            // 
+            // btnDadosEmissor
+            // 
+            this.btnDadosEmissor.Image = global::Gerador_de_Recibos.Properties.Resources.settings;
+            this.btnDadosEmissor.Location = new System.Drawing.Point(17, 178);
+            this.btnDadosEmissor.Name = "btnDadosEmissor";
+            this.btnDadosEmissor.Size = new System.Drawing.Size(123, 23);
+            this.btnDadosEmissor.TabIndex = 5;
+            this.btnDadosEmissor.Text = "Dados do Emissor";
+            this.btnDadosEmissor.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDadosEmissor.UseVisualStyleBackColor = true;
+            this.btnDadosEmissor.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btEmitir
+            // 
+            this.btEmitir.Image = global::Gerador_de_Recibos.Properties.Resources.print;
+            this.btEmitir.Location = new System.Drawing.Point(146, 178);
+            this.btEmitir.Name = "btEmitir";
+            this.btEmitir.Size = new System.Drawing.Size(75, 23);
+            this.btEmitir.TabIndex = 6;
+            this.btEmitir.Text = "Emitir";
+            this.btEmitir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btEmitir.UseVisualStyleBackColor = true;
+            this.btEmitir.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormPrincipal
             // 
@@ -326,7 +331,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormPrincipal";
-            this.Text = "Emissor de Recibos";
+            this.Text = "Emissor de Recibos v1.0";
             this.Load += new System.EventHandler(this.FormPrincipal_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
