@@ -21,6 +21,26 @@ namespace Gerador_de_Recibos
             sqlite.CreateData();
             configCreator();
             createCounter();
+            
+            //necessarie to turns backcolor label transparent over the picture box
+            var pos = this.PointToScreen(lAuto.Location);
+            var pos2 = this.PointToScreen(lCon.Location);
+            var pos3 = this.PointToScreen(label7.Location);
+            
+            pos = pbBanner.PointToClient(pos);
+            lAuto.Parent = pbBanner;
+            lAuto.Location = pos;
+            lAuto.BackColor = Color.Transparent;
+
+            pos2 = pbBanner.PointToClient(pos2);
+            lCon.Parent = pbBanner;
+            lCon.Location = pos2;
+            lCon.BackColor = Color.Transparent;
+
+            pos3 = pbBanner.PointToClient(pos3);
+            label7.Parent = pbBanner;
+            label7.Location = pos3;
+            label7.BackColor = Color.Transparent;
         }
 
         FormDadosEmissor dEmissor = new FormDadosEmissor();
@@ -329,11 +349,6 @@ namespace Gerador_de_Recibos
         {
             FormConsultar fconsult = new FormConsultar();
             fconsult.ShowDialog();
-        }
-
-        private void FormPrincipal_Load(object sender, EventArgs e)
-        {
-
         }
 
         public void configCreator()

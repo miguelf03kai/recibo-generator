@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fileHelp.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite.NET, Version=0.21.1869.3794, Culture=neutral, PublicKeyToken=c273bd375e695f9c">
       <SpecificVersion>False</SpecificVersion>
@@ -127,6 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\banner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banner1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fileHelp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

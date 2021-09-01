@@ -71,6 +71,7 @@ namespace Gerador_de_Recibos
                 }
 
                 MessageBox.Show("Dados Salvos", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
 
             }catch(Exception error){
                 throw error;
