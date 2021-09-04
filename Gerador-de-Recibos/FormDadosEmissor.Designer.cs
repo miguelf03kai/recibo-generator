@@ -32,6 +32,8 @@
             this.tbNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbTelefone = new System.Windows.Forms.MaskedTextBox();
+            this.tbCpfCnpj = new System.Windows.Forms.MaskedTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.btDiretorio = new System.Windows.Forms.Button();
             this.logo = new System.Windows.Forms.PictureBox();
@@ -51,8 +53,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btFechar = new System.Windows.Forms.Button();
-            this.tbCpfCnpj = new System.Windows.Forms.MaskedTextBox();
-            this.tbTelefone = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +62,7 @@
             this.tbNome.Location = new System.Drawing.Point(79, 24);
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(246, 20);
-            this.tbNome.TabIndex = 4;
+            this.tbNome.TabIndex = 1;
             // 
             // label1
             // 
@@ -103,6 +103,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados Emissor";
             // 
+            // tbTelefone
+            // 
+            this.tbTelefone.Location = new System.Drawing.Point(79, 154);
+            this.tbTelefone.Mask = "(##) ####-####";
+            this.tbTelefone.Name = "tbTelefone";
+            this.tbTelefone.Size = new System.Drawing.Size(246, 20);
+            this.tbTelefone.TabIndex = 6;
+            // 
+            // tbCpfCnpj
+            // 
+            this.tbCpfCnpj.Location = new System.Drawing.Point(79, 128);
+            this.tbCpfCnpj.Name = "tbCpfCnpj";
+            this.tbCpfCnpj.Size = new System.Drawing.Size(246, 20);
+            this.tbCpfCnpj.TabIndex = 5;
+            this.tbCpfCnpj.Enter += new System.EventHandler(this.tbCpfCnpj_Enter);
+            this.tbCpfCnpj.Leave += new System.EventHandler(this.tbCpfCnpj_Leave);
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -117,7 +134,7 @@
             this.btDiretorio.Location = new System.Drawing.Point(331, 230);
             this.btDiretorio.Name = "btDiretorio";
             this.btDiretorio.Size = new System.Drawing.Size(32, 23);
-            this.btDiretorio.TabIndex = 8;
+            this.btDiretorio.TabIndex = 10;
             this.btDiretorio.Text = "...";
             this.btDiretorio.UseVisualStyleBackColor = true;
             this.btDiretorio.Click += new System.EventHandler(this.btDiretorio_Click);
@@ -137,7 +154,7 @@
             this.tbLogo.Location = new System.Drawing.Point(79, 232);
             this.tbLogo.Name = "tbLogo";
             this.tbLogo.Size = new System.Drawing.Size(246, 20);
-            this.tbLogo.TabIndex = 20;
+            this.tbLogo.TabIndex = 9;
             // 
             // label9
             // 
@@ -153,7 +170,7 @@
             this.tbSite.Location = new System.Drawing.Point(79, 206);
             this.tbSite.Name = "tbSite";
             this.tbSite.Size = new System.Drawing.Size(246, 20);
-            this.tbSite.TabIndex = 18;
+            this.tbSite.TabIndex = 8;
             // 
             // label8
             // 
@@ -169,7 +186,7 @@
             this.tbEmail.Location = new System.Drawing.Point(79, 180);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(246, 20);
-            this.tbEmail.TabIndex = 16;
+            this.tbEmail.TabIndex = 7;
             // 
             // label7
             // 
@@ -203,7 +220,7 @@
             this.tbCidade.Location = new System.Drawing.Point(79, 102);
             this.tbCidade.Name = "tbCidade";
             this.tbCidade.Size = new System.Drawing.Size(246, 20);
-            this.tbCidade.TabIndex = 10;
+            this.tbCidade.TabIndex = 4;
             // 
             // label4
             // 
@@ -219,7 +236,7 @@
             this.tbBairro.Location = new System.Drawing.Point(79, 76);
             this.tbBairro.Name = "tbBairro";
             this.tbBairro.Size = new System.Drawing.Size(246, 20);
-            this.tbBairro.TabIndex = 8;
+            this.tbBairro.TabIndex = 3;
             // 
             // label3
             // 
@@ -235,7 +252,7 @@
             this.tbEndereco.Location = new System.Drawing.Point(79, 50);
             this.tbEndereco.Name = "tbEndereco";
             this.tbEndereco.Size = new System.Drawing.Size(246, 20);
-            this.tbEndereco.TabIndex = 6;
+            this.tbEndereco.TabIndex = 2;
             // 
             // label2
             // 
@@ -252,8 +269,9 @@
             this.btSalvar.Image = global::Gerador_de_Recibos.Properties.Resources.save;
             this.btSalvar.Location = new System.Drawing.Point(351, 293);
             this.btSalvar.Name = "btSalvar";
+            this.btSalvar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btSalvar.TabIndex = 6;
+            this.btSalvar.TabIndex = 11;
             this.btSalvar.Text = "Salvar";
             this.btSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btSalvar.UseVisualStyleBackColor = true;
@@ -265,28 +283,11 @@
             this.btFechar.Location = new System.Drawing.Point(432, 293);
             this.btFechar.Name = "btFechar";
             this.btFechar.Size = new System.Drawing.Size(75, 23);
-            this.btFechar.TabIndex = 7;
+            this.btFechar.TabIndex = 12;
             this.btFechar.Text = "Fechar";
             this.btFechar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btFechar.UseVisualStyleBackColor = true;
             this.btFechar.Click += new System.EventHandler(this.btFechar_Click);
-            // 
-            // tbCpfCnpj
-            // 
-            this.tbCpfCnpj.Location = new System.Drawing.Point(79, 128);
-            this.tbCpfCnpj.Name = "tbCpfCnpj";
-            this.tbCpfCnpj.Size = new System.Drawing.Size(246, 20);
-            this.tbCpfCnpj.TabIndex = 23;
-            this.tbCpfCnpj.Enter += new System.EventHandler(this.tbCpfCnpj_Enter);
-            this.tbCpfCnpj.Leave += new System.EventHandler(this.tbCpfCnpj_Leave);
-            // 
-            // tbTelefone
-            // 
-            this.tbTelefone.Location = new System.Drawing.Point(79, 154);
-            this.tbTelefone.Mask = "(##) ####-####";
-            this.tbTelefone.Name = "tbTelefone";
-            this.tbTelefone.Size = new System.Drawing.Size(246, 20);
-            this.tbTelefone.TabIndex = 24;
             // 
             // FormDadosEmissor
             // 

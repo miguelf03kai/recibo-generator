@@ -271,7 +271,7 @@
             this.lAuto.BackColor = System.Drawing.Color.Transparent;
             this.lAuto.Font = new System.Drawing.Font("Arial Narrow", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lAuto.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.lAuto.Location = new System.Drawing.Point(27, 24);
+            this.lAuto.Location = new System.Drawing.Point(27, 13);
             this.lAuto.Name = "lAuto";
             this.lAuto.Size = new System.Drawing.Size(267, 33);
             this.lAuto.TabIndex = 2;

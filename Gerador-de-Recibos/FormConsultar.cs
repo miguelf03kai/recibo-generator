@@ -120,7 +120,7 @@ namespace Gerador_de_Recibos
                     e.Graphics.DrawImage(image, new Rectangle(80, 60, 150, 110));
 
                     Image image2 = Image.FromFile(File.ReadLines(@"config.ini").Skip(9).Take(1).First().Substring(5));
-                    e.Graphics.DrawImage(image2, new Rectangle(80, 63*10, 150, 110));
+                    e.Graphics.DrawImage(image2, new Rectangle(80, 625, 150, 110));
                 }
 
                 e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(1).Take(1).First().Substring(8), headers, new SolidBrush(Color.Black), new Rectangle(180, 50, 400, 30), format);
