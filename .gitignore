@@ -3,7 +3,7 @@
 references/
 icons/
 config.ini
-Gerador-de-Recibos/obj/
-Gerador-de-Recibos/bin/
-Gerador-de-Recibos.v12.suo
+source/obj/
+source/bin/
 resources/
+diagramas/

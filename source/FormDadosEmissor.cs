@@ -18,11 +18,11 @@ namespace Gerador_de_Recibos
         {
             InitializeComponent();
         }
-        
-        //grava dados no arquivo
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+        validaCNPJ vCNPJ = new validaCNPJ();
+        validaCPF vCPF = new validaCPF();
+        
+        void salvarDadosEmissor(){
             try
             {
                 StreamReader sr = new StreamReader(@"config.ini");
@@ -72,10 +72,22 @@ namespace Gerador_de_Recibos
 
                 MessageBox.Show("Dados Salvos", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
-
-            }catch(Exception error){
+            }
+            catch (Exception error)
+            {
                 throw error;
             }
+        }
+
+        //grava dados no arquivo
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (tbNome.Text == "" || tbEndereco.Text == "" || tbTelefone.Text == "" || tbBairro.Text == "" || tbCidade.Text == "" || tbCpfCnpj.Text == "")
+            {
+                MessageBox.Show("Por Favor Preencha os Campos Obrigatórios", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+                salvarDadosEmissor();
         }
 
         private void FormDadosEmissor_Load(object sender, EventArgs e)
@@ -116,18 +128,56 @@ namespace Gerador_de_Recibos
 
         private void tbCpfCnpj_Leave(object sender, EventArgs e)
         {
-            if(tbCpfCnpj.Text.Length > 11){
+            if (tbCpfCnpj.Text.Length > 11)
+            {
                 tbCpfCnpj.Mask = "##.###.###/####-##";
+
+                if (!vCNPJ.IsCnpj(tbCpfCnpj.Text))
+                {
+                    validationDoc();
+                }
+
             }
             else if (tbCpfCnpj.Text.Length < 14)
             {
                 tbCpfCnpj.Mask = "###.###.###-##";
+
+                if (!vCPF.IsCpf(tbCpfCnpj.Text))
+                {
+                    validationDoc();
+                }
             }
+        }
+
+        void validationDoc()
+        {
+            MessageBox.Show("Número de Documento Inválido", "Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            tbCpfCnpj.Focus();
         }
 
         private void tbCpfCnpj_Enter(object sender, EventArgs e)
         {
             tbCpfCnpj.Mask = "";
+        }
+
+        private void tbCpfCnpj_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            apenasNumeros(e);
+        }
+
+        private void tbTelefone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            apenasNumeros(e);
+        }
+
+        public void apenasNumeros(KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

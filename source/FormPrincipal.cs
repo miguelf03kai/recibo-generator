@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,6 +20,8 @@ namespace Gerador_de_Recibos
             sqlite.CreateData();
             configCreator();
             createCounter();
+
+            tbValor.Text = "R$ 0,00";
             
             //necessarie to turns backcolor label transparent over the picture box
             var pos = this.PointToScreen(lAuto.Location);
@@ -70,16 +71,30 @@ namespace Gerador_de_Recibos
             if(radioButton1.Checked){
                 printPreviewDialog1.Document = printDocument1;
                 (printPreviewDialog1 as Form).WindowState = FormWindowState.Maximized;
+                (printPreviewDialog1 as Form).Icon = new System.Drawing.Icon("print.ico");
+                (printPreviewDialog1 as Form).Text = "Recibo";
                 printPreviewDialog1.ShowDialog();
             }
             else
             {
                 printPreviewDialog1.Document = printDocument2;
                 (printPreviewDialog1 as Form).WindowState = FormWindowState.Maximized;
+                (printPreviewDialog1 as Form).Icon = new System.Drawing.Icon("print.ico");
+                (printPreviewDialog1 as Form).Text = "Recibo";
                 printPreviewDialog1.ShowDialog();
             }
         }
 
+        void emissorValidation()
+        {
+            if (File.ReadLines(@"config.ini").Skip(1).Take(1).First().Length > 8)
+            {
+                saveData();
+                Emitir();
+            }
+            else
+                MessageBox.Show("Por Favor Preencha os dados do Emissor", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -91,7 +106,6 @@ namespace Gerador_de_Recibos
             try
             {
                 valor = tbValor.Text.Substring(1);
-                //Console.WriteLine(valor);
 
                 if (tbCliente.Text == "")
                 {
@@ -112,8 +126,7 @@ namespace Gerador_de_Recibos
                     }
                     else
                     {
-                        saveData();
-                        Emitir();
+                        emissorValidation();
                     }
                 }
                 else if (tbCpfCnpj.TextLength > 14)
@@ -125,8 +138,7 @@ namespace Gerador_de_Recibos
                     }
                     else
                     {
-                        saveData();
-                        Emitir();
+                        emissorValidation();
                     }
                 }
             }
@@ -185,7 +197,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 127, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 127, 138, 30));
                 ////Valor
-                e.Graphics.DrawString(tbValor.Text.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
+                e.Graphics.DrawString(tbValor.Text.Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 212), new Point(530, 212));
@@ -199,7 +211,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 ////valor Extenso
 
-                string str = conversor.EscreverExtenso(Decimal.Parse(tbValor.Text.Substring(1))).ToLower();
+                string str = conversor.EscreverExtenso(Decimal.Parse(tbValor.Text.Substring(2))).ToLower();
                 ////coloca em maiúsculo apenas a primeira letra da string
                 e.Graphics.DrawString(str[0].ToString().ToUpper() + str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
                 e.Graphics.DrawString("Referente a.....: ", content, new SolidBrush(Color.Black), new Rectangle(60, 257, 200, 30));
@@ -249,7 +261,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 695, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 695, 138, 30));
                 //Valor
-                e.Graphics.DrawString(tbValor.Text.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
+                e.Graphics.DrawString(tbValor.Text.Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 765, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 780), new Point(530, 780));
@@ -288,7 +300,7 @@ namespace Gerador_de_Recibos
         {
             tbCliente.Text = "";
             tbCpfCnpj.Text = "";
-            tbValor.Text = "";
+            tbValor.Text = "R$ 0,00";
             tbCorresp.Text = "";
         }
 
@@ -296,44 +308,14 @@ namespace Gerador_de_Recibos
         {
             this.Close();
         }
-
+        
         private void tbValor_TextChanged(object sender, EventArgs e)
         {
-            //Remove previous formatting, or the decimal check will fail including leading zeros
-            string value = tbValor.Text.Replace(",", "")
-                .Replace("$", "").Replace(".", "").TrimStart('0');
-            decimal ul;
-
-            //Check we are indeed handling a number
-            if (decimal.TryParse(value, out ul))
-            {
-                ul /= 100;
-                //Unsub the event so we don't enter a loop
-                tbValor.TextChanged -= tbValor_TextChanged;
-                //Format the text as currency
-                tbValor.Text = string.Format("{0:C2}", ul);
-                tbValor.TextChanged += tbValor_TextChanged;
-                tbValor.Select(tbValor.Text.Length, 0);
-            }
-            bool goodToGo = TextisValid(tbValor.Text);
-            //enterButton.Enabled = goodToGo;
-            if (!goodToGo)
-            {
-                tbValor.Text = "$0.00";
-                tbValor.Select(tbValor.Text.Length, 0);
-            }
-        }
-
-        private bool TextisValid(string text)
-        {
-            Regex money = new Regex(@"^\$(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$");
-            return money.IsMatch(text);
+            
         }
 
         private void tbCpfCnpj_Leave(object sender, EventArgs e)
         {
-            //if()
-
             if (tbCpfCnpj.Text.Length < 12)
                 tbCpfCnpj.Mask = "###.###.###-##";
             else if (tbCpfCnpj.Text.Length > 11)
@@ -416,7 +398,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 127, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 127, 138, 30));
                 ////Valor
-                e.Graphics.DrawString(tbValor.Text.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
+                e.Graphics.DrawString(tbValor.Text.Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 212), new Point(530, 212));
@@ -430,7 +412,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 ////valor Extenso
 
-                string str = conversor.EscreverExtenso(Decimal.Parse(tbValor.Text.Substring(1))).ToLower();
+                string str = conversor.EscreverExtenso(Decimal.Parse(tbValor.Text.Substring(2))).ToLower();
                 //coloca em maiúsculo apenas a primeira letra da string
                 e.Graphics.DrawString(str[0].ToString().ToUpper() + str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
                 e.Graphics.DrawString("Referente a.....: ", content, new SolidBrush(Color.Black), new Rectangle(60, 257, 200, 30));
@@ -473,7 +455,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 695, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 695, 138, 30));
                 //Valor
-                e.Graphics.DrawString(tbValor.Text.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
+                e.Graphics.DrawString(tbValor.Text.Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 765, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 780), new Point(530, 780));
@@ -508,6 +490,65 @@ namespace Gerador_de_Recibos
             {
                 throw error;
             }
+        }
+
+        private void tbValor_KeyUp(object sender, KeyEventArgs e)
+        {
+            valor = tbValor.Text.Replace("R$", "").Replace(",", "").Replace(" ", "").Replace("00,", "");
+            if (valor.Length == 0)
+            {
+                tbValor.Text = "0,00" + valor;
+            }
+            if (valor.Length == 1)
+            {
+                tbValor.Text = "0,0" + valor;
+            }
+            if (valor.Length == 2)
+            {
+                tbValor.Text = "0," + valor;
+            }
+            else if (valor.Length >= 3)
+            {
+                if (tbValor.Text.StartsWith("0,"))
+                {
+                    tbValor.Text = valor.Insert(valor.Length - 2, ",").Replace("0,", "");
+                }
+                else if (tbValor.Text.Contains("00,"))
+                {
+                    tbValor.Text = valor.Insert(valor.Length - 2, ",").Replace("00,", "");
+                }
+                else
+                {
+                    tbValor.Text = valor.Insert(valor.Length - 2, ",");
+                }
+            }
+            valor = tbValor.Text;
+            tbValor.Text = string.Format("{0:C}", Convert.ToDouble(valor));
+            tbValor.Select(tbValor.Text.Length, 0);
+        }
+
+        private void tbValor_Leave(object sender, EventArgs e)
+        {
+            valor = tbValor.Text.Replace("R$", "");
+            tbValor.Text = string.Format("{0:C}", Convert.ToDouble(valor));
+        }
+
+        private void tbValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != Convert.ToChar(Keys.Back))
+            {
+                if (e.KeyChar == ',')
+                {
+                    e.Handled = (tbValor.Text.Contains(","));
+                }
+                else
+                    e.Handled = true;
+            }    
+        }
+
+        private void tbCpfCnpj_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            new FormDadosEmissor().apenasNumeros(e);
         }
     }
 }

@@ -98,6 +98,9 @@
     <EmbeddedResource Include="FormConsultar.resx">
       <DependentUpon>FormConsultar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPrincipal.pt-BR.resx">
+      <DependentUpon>FormPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPrincipal.resx">
       <DependentUpon>FormPrincipal.cs</DependentUpon>
     </EmbeddedResource>

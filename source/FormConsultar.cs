@@ -84,12 +84,16 @@ namespace Gerador_de_Recibos
             {
                 printPreviewDialog1.Document = printDocument2;
                 (printPreviewDialog1 as Form).WindowState = FormWindowState.Maximized;
+                (printPreviewDialog1 as Form).Icon = new System.Drawing.Icon("print.ico");
+                (printPreviewDialog1 as Form).Text = "Recibo";
                 printPreviewDialog1.ShowDialog();
             }
             else
             {
                 printPreviewDialog1.Document = printDocument1;
                 (printPreviewDialog1 as Form).WindowState = FormWindowState.Maximized;
+                (printPreviewDialog1 as Form).Icon = new System.Drawing.Icon("print.ico");
+                (printPreviewDialog1 as Form).Text = "Recibo";
                 printPreviewDialog1.ShowDialog();
             }
 
@@ -142,7 +146,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 127, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 127, 138, 30));
                 ////Valor
-                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
+                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 212), new Point(530, 212));
@@ -156,7 +160,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 ////valor Extenso
 
-                string str = conversor.EscreverExtenso(Decimal.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(1))).ToLower();
+                string str = conversor.EscreverExtenso(Decimal.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2))).ToLower();
                 ////coloca em maiúsculo apenas a primeira letra da string
                 e.Graphics.DrawString(str[0].ToString().ToUpper() + str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
                 e.Graphics.DrawString("Referente a.....: ", content, new SolidBrush(Color.Black), new Rectangle(60, 257, 200, 30));
@@ -206,7 +210,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 695, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645,695, 138, 30));
                 //Valor
-                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
+                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 765, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 780), new Point(530, 780));
@@ -286,7 +290,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 127, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 127, 138, 30));
                 ////Valor
-                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
+                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 128, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 197, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 212), new Point(530, 212));
@@ -300,7 +304,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 ////valor Extenso
 
-                string str = conversor.EscreverExtenso(Decimal.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(1))).ToLower();
+                string str = conversor.EscreverExtenso(Decimal.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2))).ToLower();
                 //coloca em maiúsculo apenas a primeira letra da string
                 e.Graphics.DrawString(str[0].ToString().ToUpper() + str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
                 e.Graphics.DrawString("Referente a.....: ", content, new SolidBrush(Color.Black), new Rectangle(60, 257, 200, 30));
@@ -342,7 +346,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.FillRectangle(new SolidBrush(Color.LightGray), new Rectangle(645, 695, 138, 30));
                 e.Graphics.DrawRectangle(lapis, new Rectangle(645, 695, 138, 30));
                 //Valor
-                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
+                e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2), content, new SolidBrush(Color.Blue), new Rectangle(650, 695, 120, 30), format);
 
                 e.Graphics.DrawString("Recebi(emos) de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 765, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 780), new Point(530, 780));
