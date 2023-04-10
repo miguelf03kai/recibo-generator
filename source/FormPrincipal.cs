@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,8 @@ namespace Gerador_de_Recibos
         validaCNPJ vCNPJ = new validaCNPJ();
         validaCPF vCPF = new validaCPF();
         SQLite sqlite = new SQLite();
+
+        CultureInfo lang;
 
         string valor = "";
 
@@ -150,6 +153,7 @@ namespace Gerador_de_Recibos
             }
         }
 
+        //design para recibo de venda
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Pen lapis = new Pen(Color.Black);
@@ -220,8 +224,9 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawString(tbCorresp.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 256, 600, 30));
 
                 DateTime dt = DateTime.Now;
+                lang = new CultureInfo("pt-BR");
 
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 327, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 397), new Point(780, 397));
@@ -282,7 +287,7 @@ namespace Gerador_de_Recibos
                 //referente
                 e.Graphics.DrawString(tbCorresp.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 828, 600, 30));
 
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 900, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 960), new Point(780, 960));
@@ -370,6 +375,7 @@ namespace Gerador_de_Recibos
             }
         }
 
+        //design para recibo de compra
         private void printDocument2_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Pen lapis = new Pen(Color.Black);
@@ -421,8 +427,9 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawString(tbCorresp.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 256, 600, 30));
 
                 DateTime dt = DateTime.Now;
+                lang = new CultureInfo("pt-BR");
 
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 327, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 397), new Point(780, 397));
@@ -476,7 +483,7 @@ namespace Gerador_de_Recibos
                 //referente
                 e.Graphics.DrawString(tbCorresp.Text, content, new SolidBrush(Color.Blue), new Rectangle(190, 828, 600, 30));
 
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 900, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 960), new Point(780, 960));

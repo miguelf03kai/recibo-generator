@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace Gerador_de_Recibos
         }
 
         SQLite sqlite = new SQLite();
+        CultureInfo lang = new CultureInfo("pt-BR");
+        DateTime dt;
 
         private void FormConsultar_Load(object sender, EventArgs e)
         {
@@ -99,6 +102,8 @@ namespace Gerador_de_Recibos
 
         }
 
+
+        //design para recibo de venda
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Pen lapis = new Pen(Color.Black);
@@ -159,7 +164,7 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawString("A importância de: ", content, new SolidBrush(Color.Black), new Rectangle(60, 227, 200, 30));
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 242), new Point(780, 242));
                 ////valor Extenso
-
+                
                 string str = conversor.EscreverExtenso(Decimal.Parse(dataGridView1.CurrentRow.Cells[3].Value.ToString().Substring(2))).ToLower();
                 ////coloca em maiúsculo apenas a primeira letra da string
                 e.Graphics.DrawString(str[0].ToString().ToUpper() + str.Substring(1), content, new SolidBrush(Color.Blue), new Rectangle(190, 226, 600, 30));
@@ -168,9 +173,9 @@ namespace Gerador_de_Recibos
                 ////referente
                 e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[4].Value.ToString(), content, new SolidBrush(Color.Blue), new Rectangle(190, 256, 600, 30));
 
-                DateTime dt = DateTime.Now;
+                dt = DateTime.Now;
 
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 327, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 397), new Point(780, 397));
@@ -230,8 +235,8 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 846), new Point(780, 846));
                 //referente
                 e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[4].Value.ToString(), content, new SolidBrush(Color.Blue), new Rectangle(190, 828, 600, 30));
-
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                //data
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 900, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 960), new Point(780, 960));
@@ -262,6 +267,7 @@ namespace Gerador_de_Recibos
 
         }
 
+        //design para recibo de compra
         private void printDocument2_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Pen lapis = new Pen(Color.Black);
@@ -312,9 +318,9 @@ namespace Gerador_de_Recibos
                 //referente
                 e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[4].Value.ToString(), content, new SolidBrush(Color.Blue), new Rectangle(190, 256, 600, 30));
 
-                DateTime dt = DateTime.Now;
+                dt = DateTime.Now;
 
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D",lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 327, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 397), new Point(780, 397));
@@ -366,8 +372,8 @@ namespace Gerador_de_Recibos
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(190, 846), new Point(780, 846));
                 //referente
                 e.Graphics.DrawString(dataGridView1.CurrentRow.Cells[4].Value.ToString(), content, new SolidBrush(Color.Blue), new Rectangle(190,828, 600, 30));
-
-                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToLongDateString(),
+                //data
+                e.Graphics.DrawString(File.ReadLines(@"config.ini").Skip(4).Take(1).First().Substring(7) + ", " + dt.ToString("D", lang),
                                       content, new SolidBrush(Color.Black), new Rectangle(60, 900, 300, 30));
 
                 e.Graphics.DrawLine(new Pen(Color.Black), new Point(400, 960), new Point(780, 960));

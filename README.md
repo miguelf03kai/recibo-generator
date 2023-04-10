@@ -1,4 +1,4 @@
-# Gerador de Recibos
+# Recibo Generator
 
 Pequeno sistema para geração rápida de recibos, de recebimento e pagamento.
 
